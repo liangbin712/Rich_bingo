@@ -68,7 +68,7 @@ int main()
 	system("pause");
 }*/
 //1*2*3*.....*n-1*n;
-int factor(int n)
+/*int factor(int n)
 {
 	if (n == 1)
 	{
@@ -80,4 +80,5 @@ int main()
 {
 	printf("%d\n", factor(5));
 	system("pause");
-}
+}*/
+1.递归和非递归分别实现求第n个斐波那契数。
