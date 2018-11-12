@@ -48,4 +48,3 @@ main()
 		bonus = bonus10 + (i - 1000000)*0.01;
 	printf("bonus=%d", bonus);
 }
-
