@@ -10,6 +10,7 @@ void P_Boom();
 char RoundMove(int row, int col);
 char g_board[Row + 2][Col + 2];
 int d_map[Row + 2][Col + 2];
+char D_COL(int row, int col);
 void Print()
 {
 	printf("   ");
@@ -29,6 +30,25 @@ void Print()
 		printf("\n");
 	}
 } 
+void Print_Mine()
+{
+	printf("   ");
+	for (int i = 1; i < Col + 1; i++)
+	{
+		printf("%d ", i);
+	}
+	printf("\n");
+	printf("   _____________________\n");
+	for (int row = 1; row < Row + 1; row++)
+	{
+		printf("%02d|", row);
+		for (int col = 1; col < Col + 1; col++)
+		{
+			printf("%d ", d_map[row][col]);
+		}
+		printf("\n");
+	}
+}
 void PrintMine()
 {
 	printf("   ");
@@ -61,6 +81,8 @@ void P_YT()
 }
 void F_blank()
 {
+	//int m[] = { 0, -1, -1, -1, 0, 1, 1, 1 };
+	//int n[] = { -1, -1, 0, +1, +1, 0, -1, +1 };
 	int row;
 	int col;
 	while (1)
@@ -81,120 +103,42 @@ void F_blank()
 			win = 0;
 			break;
 		}
-		RoundMove(row, col);
-		g_board[row][col - 1] = RoundMove(row, col - 1);
-		if (g_board[row][col - 1] == '0')
-		{
-			int rows = row;
-			int cols = col;
-			g_board[rows][cols - 1] = RoundMove(rows, cols - 1);
-			g_board[rows - 1][cols - 1] = RoundMove(rows - 1, cols - 1);
-			g_board[rows - 1][cols] = RoundMove(rows - 1, cols);
-			g_board[rows - 1][cols + 1] = RoundMove(rows - 1, cols + 1);
-			g_board[rows][cols + 1] = RoundMove(rows, cols + 1);
-			g_board[rows + 1][cols] = RoundMove(rows + 1, cols);
-			g_board[rows + 1][cols - 1] = RoundMove(rows + 1, cols - 1);
-			g_board[rows + 1][cols + 1] = RoundMove(rows + 1, cols + 1);
-		}
-		g_board[row - 1][col - 1] = RoundMove(row - 1, col - 1);
-		if (g_board[row - 1][col - 1] == '0')
-		{
-			int rows = row;
-			int cols = col;
-			g_board[rows][cols - 1] = RoundMove(rows, cols - 1);
-			g_board[rows - 1][cols - 1] = RoundMove(rows - 1, cols - 1);
-			g_board[rows - 1][cols] = RoundMove(rows - 1, cols);
-			g_board[rows - 1][cols + 1] = RoundMove(rows - 1, cols + 1);
-			g_board[rows][cols + 1] = RoundMove(rows, cols + 1);
-			g_board[rows + 1][cols] = RoundMove(rows + 1, cols);
-			g_board[rows + 1][cols - 1] = RoundMove(rows + 1, cols - 1);
-			g_board[rows + 1][cols + 1] = RoundMove(rows + 1, cols + 1);
-		}
-		g_board[row - 1][col] = RoundMove(row - 1, col);
-		if (g_board[row - 1][col] == '0')
-		{
-			int rows = row;
-			int cols = col;
-			g_board[rows][cols - 1] = RoundMove(rows, cols - 1);
-			g_board[rows - 1][cols - 1] = RoundMove(rows - 1, cols - 1);
-			g_board[rows - 1][cols] = RoundMove(rows - 1, cols);
-			g_board[rows - 1][cols + 1] = RoundMove(rows - 1, cols + 1);
-			g_board[rows][cols + 1] = RoundMove(rows, cols + 1);
-			g_board[rows + 1][cols] = RoundMove(rows + 1, cols);
-			g_board[rows + 1][cols - 1] = RoundMove(rows + 1, cols - 1);
-			g_board[rows + 1][cols + 1] = RoundMove(rows + 1, cols + 1);
-		}
-		g_board[row - 1][col + 1] = RoundMove(row - 1, col + 1);
-		if (g_board[row - 1][col + 1] == '0')
-		{
-			int rows = row;
-			int cols = col;
-			g_board[rows][cols - 1] = RoundMove(rows, cols - 1);
-			g_board[rows - 1][cols - 1] = RoundMove(rows - 1, cols - 1);
-			g_board[rows - 1][cols] = RoundMove(rows - 1, cols);
-			g_board[rows - 1][cols + 1] = RoundMove(rows - 1, cols + 1);
-			g_board[rows][cols + 1] = RoundMove(rows, cols + 1);
-			g_board[rows + 1][cols] = RoundMove(rows + 1, cols);
-			g_board[rows + 1][cols - 1] = RoundMove(rows + 1, cols - 1);
-			g_board[rows + 1][cols + 1] = RoundMove(rows + 1, cols + 1);
-		}
-		g_board[row][col + 1] = RoundMove(row, col + 1);
-		if (g_board[row][col + 1] == '0')
-		{
-			int rows = row;
-			int cols = col;
-			g_board[rows][cols - 1] = RoundMove(rows, cols - 1);
-			g_board[rows - 1][cols - 1] = RoundMove(rows - 1, cols - 1);
-			g_board[rows - 1][cols] = RoundMove(rows - 1, cols);
-			g_board[rows - 1][cols + 1] = RoundMove(rows - 1, cols + 1);
-			g_board[rows][cols + 1] = RoundMove(rows, cols + 1);
-			g_board[rows + 1][cols] = RoundMove(rows + 1, cols);
-			g_board[rows + 1][cols - 1] = RoundMove(rows + 1, cols - 1);
-			g_board[rows + 1][cols + 1] = RoundMove(rows + 1, cols + 1);
-		}
-		g_board[row + 1][col] = RoundMove(row + 1, col);
-		if (g_board[row + 1][col] == '0')
-		{
-			int rows = row;
-			int cols = col;
-			g_board[rows][cols - 1] = RoundMove(rows, cols - 1);
-			g_board[rows - 1][cols - 1] = RoundMove(rows - 1, cols - 1);
-			g_board[rows - 1][cols] = RoundMove(rows - 1, cols);
-			g_board[rows - 1][cols + 1] = RoundMove(rows - 1, cols + 1);
-			g_board[rows][cols + 1] = RoundMove(rows, cols + 1);
-			g_board[rows + 1][cols] = RoundMove(rows + 1, cols);
-			g_board[rows + 1][cols - 1] = RoundMove(rows + 1, cols - 1);
-			g_board[rows + 1][cols + 1] = RoundMove(rows + 1, cols + 1);
-		}
-		g_board[row + 1][col - 1] = RoundMove(row + 1, col - 1);
-		if (g_board[row + 1][col - 1] == '0')
-		{
-			int rows = row;
-			int cols = col;
-			g_board[rows][cols - 1] = RoundMove(rows, cols - 1);
-			g_board[rows - 1][cols - 1] = RoundMove(rows - 1, cols - 1);
-			g_board[rows - 1][cols] = RoundMove(rows - 1, cols);
-			g_board[rows - 1][cols + 1] = RoundMove(rows - 1, cols + 1);
-			g_board[rows][cols + 1] = RoundMove(rows, cols + 1);
-			g_board[rows + 1][cols] = RoundMove(rows + 1, cols);
-			g_board[rows + 1][cols - 1] = RoundMove(rows + 1, cols - 1);
-			g_board[rows + 1][cols + 1] = RoundMove(rows + 1, cols + 1);
-		}
-		g_board[row + 1][col + 1] = RoundMove(row + 1, col + 1);
-		if (g_board[row + 1][col + 1] == '0')
-		{
-			int rows = row;
-			int cols = col;
-			g_board[rows][cols - 1] = RoundMove(rows, cols - 1);
-			g_board[rows - 1][cols - 1] = RoundMove(rows - 1, cols - 1);
-			g_board[rows - 1][cols] = RoundMove(rows - 1, cols);
-			g_board[rows - 1][cols + 1] = RoundMove(rows - 1, cols + 1);
-			g_board[rows][cols + 1] = RoundMove(rows, cols + 1);
-			g_board[rows + 1][cols] = RoundMove(rows + 1, cols);
-			g_board[rows + 1][cols - 1] = RoundMove(rows + 1, cols - 1);
-			g_board[rows + 1][cols + 1] = RoundMove(rows + 1, cols + 1);
-		}
-		break;
+			D_COL(row,col);
+			break;
+	}
+}
+char D_COL(int row, int col)
+{
+	//查找到的格子周围没有雷
+	if (RoundMove(row, col) == '0' && g_board[row][col] == '*' && row > 0 && row < Row +1 && col > 0 && col < Col + 1)
+	{
+			/*if (RoundMove(row + *m, col + *n) != '0')
+			{
+				g_board[row + *m][col + *n] = RoundMove(row + *m, col + *n);
+				printf("go ");
+			}
+			if (RoundMove(row + *m, col + *n) == '0')
+			{
+				g_board[row + *m][col + *n] = RoundMove(row + *m, col + *n);
+				D_COL(m + 1, n + 1, row, col);
+				printf("stop ");
+			}*/
+		//int m[] = { 0, -1, -1, -1, 0, 1, 1, 1 };
+		//int n[] = { -1, -1, 0, +1, +1, 0, -1, +1 };
+		g_board[row][col] = '0';
+		D_COL( row, col-1);
+		D_COL( row - 1, col - 1);
+		D_COL( row - 1, col);
+		D_COL( row - 1, col + 1);
+		D_COL( row, col + 1);
+		D_COL( row + 1 , col); 
+		D_COL( row + 1, col - 1);
+		D_COL( row + 1 , col + 1);
+	}
+	//查找到的格子周围有地雷
+	if (RoundMove(row, col) != '0')
+	{
+		g_board[row][col] = RoundMove(row, col);
 	}
 }
 void P_Boom()
@@ -213,136 +157,19 @@ void P_Boom()
 		i++;
 	}
 }
-/*void Round()
-{
-	int row, col;
-	g_board[row][col - 1] = RoundMove(row, col - 1);
-	if (g_board[row][col - 1] == '0')
-	{
-		int rows = row;
-		int cols = col;
-		g_board[rows][cols - 1] = RoundMove(rows, cols - 1);
-		g_board[rows - 1][cols - 1] = RoundMove(rows - 1, cols - 1);
-		g_board[rows - 1][cols] = RoundMove(rows - 1, cols);
-		g_board[rows - 1][cols + 1] = RoundMove(rows - 1, cols + 1);
-		g_board[rows][cols + 1] = RoundMove(rows, cols + 1);
-		g_board[rows + 1][cols] = RoundMove(rows + 1, cols);
-		g_board[rows + 1][cols - 1] = RoundMove(rows + 1, cols - 1);
-		g_board[rows + 1][cols + 1] = RoundMove(rows + 1, cols + 1);
-	}
-	g_board[row - 1][col - 1] = RoundMove(row - 1, col - 1);
-	if (g_board[row - 1][col - 1] == '0')
-	{
-		int rows = row;
-		int cols = col;
-		g_board[rows][cols - 1] = RoundMove(rows, cols - 1);
-		g_board[rows - 1][cols - 1] = RoundMove(rows - 1, cols - 1);
-		g_board[rows - 1][cols] = RoundMove(rows - 1, cols);
-		g_board[rows - 1][cols + 1] = RoundMove(rows - 1, cols + 1);
-		g_board[rows][cols + 1] = RoundMove(rows, cols + 1);
-		g_board[rows + 1][cols] = RoundMove(rows + 1, cols);
-		g_board[rows + 1][cols - 1] = RoundMove(rows + 1, cols - 1);
-		g_board[rows + 1][cols + 1] = RoundMove(rows + 1, cols + 1);
-	}
-	g_board[row - 1][col] = RoundMove(row - 1, col);
-	if (g_board[row - 1][col] == '0')
-	{
-		int rows = row;
-		int cols = col;
-		g_board[rows][cols - 1] = RoundMove(rows, cols - 1);
-		g_board[rows - 1][cols - 1] = RoundMove(rows - 1, cols - 1);
-		g_board[rows - 1][cols] = RoundMove(rows - 1, cols);
-		g_board[rows - 1][cols + 1] = RoundMove(rows - 1, cols + 1);
-		g_board[rows][cols + 1] = RoundMove(rows, cols + 1);
-		g_board[rows + 1][cols] = RoundMove(rows + 1, cols);
-		g_board[rows + 1][cols - 1] = RoundMove(rows + 1, cols - 1);
-		g_board[rows + 1][cols + 1] = RoundMove(rows + 1, cols + 1);
-	}
-	g_board[row - 1][col + 1] = RoundMove(row - 1, col + 1);
-	if (g_board[row - 1][col + 1] == '0')
-	{
-		int rows = row;
-		int cols = col;
-		g_board[rows][cols - 1] = RoundMove(rows, cols - 1);
-		g_board[rows - 1][cols - 1] = RoundMove(rows - 1, cols - 1);
-		g_board[rows - 1][cols] = RoundMove(rows - 1, cols);
-		g_board[rows - 1][cols + 1] = RoundMove(rows - 1, cols + 1);
-		g_board[rows][cols + 1] = RoundMove(rows, cols + 1);
-		g_board[rows + 1][cols] = RoundMove(rows + 1, cols);
-		g_board[rows + 1][cols - 1] = RoundMove(rows + 1, cols - 1);
-		g_board[rows + 1][cols + 1] = RoundMove(rows + 1, cols + 1);
-	}
-	g_board[row][col + 1] = RoundMove(row, col + 1);
-	if (g_board[row][col + 1] == '0')
-	{
-		int rows = row;
-		int cols = col;
-		g_board[rows][cols - 1] = RoundMove(rows, cols - 1);
-		g_board[rows - 1][cols - 1] = RoundMove(rows - 1, cols - 1);
-		g_board[rows - 1][cols] = RoundMove(rows - 1, cols);
-		g_board[rows - 1][cols + 1] = RoundMove(rows - 1, cols + 1);
-		g_board[rows][cols + 1] = RoundMove(rows, cols + 1);
-		g_board[rows + 1][cols] = RoundMove(rows + 1, cols);
-		g_board[rows + 1][cols - 1] = RoundMove(rows + 1, cols - 1);
-		g_board[rows + 1][cols + 1] = RoundMove(rows + 1, cols + 1);
-	}
-	g_board[row + 1][col] = RoundMove(row + 1, col);
-	if (g_board[row + 1][col] == '0')
-	{
-		int rows = row;
-		int cols = col;
-		g_board[rows][cols - 1] = RoundMove(rows, cols - 1);
-		g_board[rows - 1][cols - 1] = RoundMove(rows - 1, cols - 1);
-		g_board[rows - 1][cols] = RoundMove(rows - 1, cols);
-		g_board[rows - 1][cols + 1] = RoundMove(rows - 1, cols + 1);
-		g_board[rows][cols + 1] = RoundMove(rows, cols + 1);
-		g_board[rows + 1][cols] = RoundMove(rows + 1, cols);
-		g_board[rows + 1][cols - 1] = RoundMove(rows + 1, cols - 1);
-		g_board[rows + 1][cols + 1] = RoundMove(rows + 1, cols + 1);
-	}
-	g_board[row + 1][col - 1] = RoundMove(row + 1, col - 1);
-	if (g_board[row + 1][col - 1] == '0')
-	{
-		int rows = row;
-		int cols = col;
-		g_board[rows][cols - 1] = RoundMove(rows, cols - 1);
-		g_board[rows - 1][cols - 1] = RoundMove(rows - 1, cols - 1);
-		g_board[rows - 1][cols] = RoundMove(rows - 1, cols);
-		g_board[rows - 1][cols + 1] = RoundMove(rows - 1, cols + 1);
-		g_board[rows][cols + 1] = RoundMove(rows, cols + 1);
-		g_board[rows + 1][cols] = RoundMove(rows + 1, cols);
-		g_board[rows + 1][cols - 1] = RoundMove(rows + 1, cols - 1);
-		g_board[rows + 1][cols + 1] = RoundMove(rows + 1, cols + 1);
-	}
-	g_board[row + 1][col + 1] = RoundMove(row + 1, col + 1);
-	if (g_board[row + 1][col + 1] == '0')
-	{
-		int rows = row;
-		int cols = col;
-		g_board[rows][cols - 1] = RoundMove(rows, cols - 1);
-		g_board[rows - 1][cols - 1] = RoundMove(rows - 1, cols - 1);
-		g_board[rows - 1][cols] = RoundMove(rows - 1, cols);
-		g_board[rows - 1][cols + 1] = RoundMove(rows - 1, cols + 1);
-		g_board[rows][cols + 1] = RoundMove(rows, cols + 1);
-		g_board[rows + 1][cols] = RoundMove(rows + 1, cols);
-		g_board[rows + 1][cols - 1] = RoundMove(rows + 1, cols - 1);
-		g_board[rows + 1][cols + 1] = RoundMove(rows + 1, cols + 1);
-	}
-}*/
 char RoundMove(int row,int col)
 {
-
 	int leinum = (d_map[row][col - 1] - 0) + (d_map[row - 1][col - 1] - 0) + (d_map[row - 1][col] - 0) +
 			(d_map[row - 1][col + 1] - 0) + (d_map[row][col + 1] - 0) + (d_map[row + 1][col] - 0) +
 			(d_map[row + 1][col - 1] - 0) +(d_map[row + 1][col + 1] - 0);
 	if (leinum > 0)
 	{
-		g_board[row][col] = leinum + '0';
+		/*g_board[row][col] = leinum + '0'*/;
 		return leinum + '0';
 	}
 	if (leinum == 0)
 	{
-		g_board[row][col] = '0';
+		/*g_board[row][col] = '0'*/;
 		return '0';
 	}
 }
@@ -367,6 +194,8 @@ int Fullblank()
 }
 int main()
 {
+	int m[] = { 0, -1, -1, -1, 0, 1, 1, 1 };
+	int n[] = { -1, -1, 0, +1, +1, 0, -1, +1 };
 	srand((unsigned int)time(NULL));
 	int a;
 	//1.游戏开始选项
@@ -393,6 +222,7 @@ int main()
 		//4.打印move盘，显示周围雷数
 		//5.判断是否踩雷, 若踩到雷，跳出循环
 		Print();
+		PrintMine();
 		if (win == 1 && Fullblank() == 1)
 		{ 
 			printf("恭喜你，赢啦！\n");
@@ -401,6 +231,7 @@ int main()
 		}
 		if (win == 0 && Fullblank() == 0)
 		{
+			//g_board[row][col] = 'p';
 			printf("恭喜你，踩到雷，输啦！\n");
 			Print();
 			break;
@@ -408,7 +239,6 @@ int main()
 		//6.若没有踩到雷，判断格子是否已经满了，若满了，也得跳出循环
 	}
 	printf("游戏结束!");
-
 	system("pause");
 	return 0;
 }
