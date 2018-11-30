@@ -214,7 +214,7 @@ int main()
 1 2 3 
 4 5 6 
 7 8 9*/
-int find(int arr[3][3],int a)
+/*int find(int arr[3][3],int a)
 {
 	if (a <= *(arr+2))
 	{
@@ -231,5 +231,18 @@ int main()
 	scanf("%d", &a);
 	int arr[3][3] = {{ 1, 2, 3 },{ 4, 5, 6 },{ 7, 8, 9 }};
 	find(arr,a);
+	system("pause");
+}*/
+int main()
+{
+	int a = 0;
+	for (int i = 0; i < 5;i++)
+	{
+		a + 1;
+	}
+	printf("%d",a);
+// 	int arr[3][3] = { { 1, 12, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+// 	printf("%d   ", **arr);
+// 	printf("%d", *(*arr+1));
 	system("pause");
 }

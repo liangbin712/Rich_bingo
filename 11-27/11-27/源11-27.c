@@ -1,6 +1,7 @@
 #define  _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 // 写一个函数返回参数二进制中 1 的个数
 // 比如： 15 0000 1111 4 个 1
 // 程序原型：
@@ -229,3 +230,4 @@ int main()
 	printf("   %d", num);
 	system("pause");
 }*/
+
