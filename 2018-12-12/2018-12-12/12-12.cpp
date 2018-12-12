@@ -8,32 +8,32 @@ struct node    //定义结点结构类型
 node * Create();          //创建链表函数，返回表头
 void Showlist(node *head);   //遍历链表的函数，参数为表头
 node * Search(node *head, char keyWord);
-void Insert(node *&head,char keyWord);
+void Insert(node *&head, char keyWord);
 void Delete(node *&head, char keyWord);
 void Destroy(node * &head);
 int main()
 {
-		node *head;
-		head = Create();    //把创建好的链表给头
-		Showlist(head);      //把头给它遍历
-		char keyWord,deletep;
-		cout << "请输入要查找的数据" << endl;
-		cin >> keyWord;
-		Insert(head,keyWord);
-		Showlist(head);
-		cout << "请输入要删除结点的数据" << endl;
-		cin >> deletep;
-		Delete(head,deletep);  
-		Showlist(head);
-		cout << "是否要清除链表,是选0，否任意按" << endl;
-		int a;
-		cin >> a;
-		if (a < 0)
-		{
-			Destroy(head);
-		}
-		Showlist(head);
-		system("pause");
+	node *head;
+	head = Create();    //把创建好的链表给头
+	Showlist(head);      //把头给它遍历
+	char keyWord, deletep;
+	cout << "请输入要查找的数据" << endl;
+	cin >> keyWord;
+	Insert(head, keyWord);
+	Showlist(head);
+	cout << "请输入要删除结点的数据" << endl;
+	cin >> deletep;
+	Delete(head, deletep);
+	Showlist(head);
+	cout << "是否要清除链表,是选0，否任意按" << endl;
+	int a;
+	cin >> a;
+	if (a < 0)
+	{
+		Destroy(head);
+	}
+	Showlist(head);
+	system("pause");
 }
 node *Create()
 {
@@ -67,7 +67,7 @@ void Showlist(node *head) //遍历链表的函数，参数为表头
 {
 	node *pRead = head;   //访问指针一开始指向表头
 	cout << "链表中的数据为" << endl;
-	while (pRead!=NULL)  //当访问指针存在时（即没有到达表尾之后）
+	while (pRead != NULL)  //当访问指针存在时（即没有到达表尾之后）
 	{
 		cout << pRead->data; //输出链表代表字符串
 		pRead = pRead->next;//访问指针向后移动
@@ -92,7 +92,7 @@ node * Search(node *head, char keyWord)//链表的查询
 void Insert(node *&head, char keyWord)  //是在keyword字符处插入新的结点
 {
 	Search(head, keyWord);
-	while(Search(head, keyWord) == NULL)
+	while (Search(head, keyWord) == NULL)
 	{
 		cout << "没有找到相应结点" << endl;
 		cout << "请重新输入要查找的数据" << endl;
@@ -104,7 +104,7 @@ void Insert(node *&head, char keyWord)  //是在keyword字符处插入新的结点
 	node *newnode = new node; //建立一个新结点
 	newnode->data = newdata;  //把新结点的数据newdata传给新结点
 	node *pGuard = Search(head, keyWord);  //pGuard是插入位置前的结点指针
-	if (head == NULL|| pGuard == NULL)    //如果链表没有结点或者找不到关键字结点
+	if (head == NULL || pGuard == NULL)    //如果链表没有结点或者找不到关键字结点
 	{                                    //插入到表头位置
 		newnode->next = head;      //先连
 		head = newnode;             //后断
