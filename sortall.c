@@ -16,7 +16,7 @@ int InsertSort(int arr[],int size)   //时间复杂度：O(n^2)空间复杂度�
     }
     arr[j+1] = key;
 }
-void selectSort(int arr[],int size)//时间复杂度：O(n^2)空间复杂度：O(1)稳定
+void selectSort(int arr[],int size)//时间复杂度：O(n^2)空间复杂度：O(1)不稳定
 {
   for(int i = 0;i < size;i++)
   {
@@ -241,6 +241,16 @@ void bubbleSort(int array[],int size)   //时间复杂度：O(n^2)空间复杂�
       {
         swap(array,j,j+1);
       }
+    }
+  }
+}
+void NorecurrenceMergeSort(int array[],int left,int right,int extra[])
+{
+  for(int i = 1;i < right;i = 2 * i)
+  {
+    for(int j = i-1;j < right;j = 2*j )
+    {
+        
     }
   }
 }
