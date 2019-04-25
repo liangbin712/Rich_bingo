@@ -44,6 +44,10 @@ int main()
 {
   while(1)
   {
+     bzero(buf,1024);
+     bzero(argv,32);
+     a = 0;
+    file = NULL;
     int i = 0;
     char pwd[100] = {0};
     //do_face();
@@ -63,10 +67,22 @@ int main()
     {
       if(a == 0)
       {
-      argv[a] = strtok(NULL," ");
-      a++;
+        argv[a] = strtok(buf," ");
+        a++;
       }
-      argv[a] = strtok(buf," ");
+      if(strcmp(argv[0],"cd") == 0)
+      {
+        argv[a] = strtok(NULL," ");
+        chdir(argv[a]);
+        break;
+      }
+      if(strcmp(argv[0],"cat") == 0)
+      {
+        argv[a] = strtok(NULL," ");
+        a++;  
+        break;
+      }
+      argv[a] = strtok(NULL," ");
       a++;
     }
     argv[i] = NULL;
